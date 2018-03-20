@@ -36,6 +36,33 @@ namespace Fritz.Analyzers
 					  createChangedSolution: c => PrefixMethodWithAdd(context.Document, method, c),
 					  equivalenceKey: Title),
 				 diagnostic);
+
+			context.RegisterCodeFix(
+					CodeAction.Create(
+						title: "Replace First Word with Add",
+						createChangedSolution: c => ReplaceFirstWordWithAdd(context.Document, method, c),
+						equivalenceKey: "Replace First Word with Add"),
+					diagnostic);
+
+
+		}
+
+		private async Task<Solution> ReplaceFirstWordWithAdd(Document document, MethodDeclarationSyntax method, CancellationToken cancellationToken)
+		{
+			var identifierToken = method.Identifier;
+
+			// TODO: Replace first word in method name
+			var newName = $"Add{identifierToken.Text}";
+
+			var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
+			var methodSymbol = semanticModel.GetDeclaredSymbol(method, cancellationToken);
+
+			var originalSolution = document.Project.Solution;
+			var optionSet = originalSolution.Workspace.Options;
+			var newSolution = await Renamer.RenameSymbolAsync(
+				document.Project.Solution, methodSymbol, newName, optionSet, cancellationToken).ConfigureAwait(false);
+
+			return newSolution;
 		}
 
 		private async Task<Solution> PrefixMethodWithAdd(Document document, MethodDeclarationSyntax method, CancellationToken cancellationToken)
