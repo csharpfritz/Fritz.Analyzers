@@ -39,7 +39,7 @@ namespace Fritz.Analyzers
 					!method.Name.StartsWith("Add"))
 				{
 					context.ReportDiagnostic(Diagnostic.Create(
-						Rule, method.Locations[0]));
+						Rule, method.Locations[0]));		
 				}
 			}
 		}
