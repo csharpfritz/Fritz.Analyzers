@@ -9,17 +9,20 @@
   <PropertyGroup>
     <PackageId>Fritz.Analyzers</PackageId>
     <PackageVersion>1.0.0.0</PackageVersion>
-    <Authors>jeffr</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <Authors>Jeffrey T. Fritz</Authors>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/csharpfritz/Fritz.Analyzers/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/csharpfritz/Fritz.Analyzers</PackageProjectUrl>
+    <PackageIconUrl></PackageIconUrl>
+    <RepositoryUrl>https://github.com/csharpfritz/Fritz.Analyzers</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Fritz.Analyzers</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
+    <Description>A collection of analyzers that help adhere to ASP.NET Core coding standards</Description>
+    <PackageReleaseNotes>Initial release to enforce standard naming of middleware and dependency injection helper methods</PackageReleaseNotes>
     <Copyright>Copyright</Copyright>
     <PackageTags>Fritz.Analyzers, analyzers</PackageTags>
     <NoPackageAnalysis>true</NoPackageAnalysis>
+    <Version>0.1.0</Version>
+    <Company>Jeffrey T. Fritz</Company>
+    <NeutralLanguage>(None)</NeutralLanguage>
   </PropertyGroup>
    
   <ItemGroup>
@@ -35,10 +38,6 @@
   <ItemGroup>
     <None Update="tools\*.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="" />
     <None Include="$(OutputPath)\$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="DependencyInjectionNaming\" />
   </ItemGroup>
 
 </Project>

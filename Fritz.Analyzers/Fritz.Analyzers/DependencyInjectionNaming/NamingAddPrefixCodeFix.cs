@@ -12,15 +12,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Fritz.Analyzers
+namespace Fritz.Analyzers.DependencyInjectionNaming
 {
 
-	[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(DependencyInjectionNamingAddPrefixCodeFix)), Shared]
-	public class DependencyInjectionNamingAddPrefixCodeFix : CodeFixProvider
+	[ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(NamingAddPrefixCodeFix)), Shared]
+	public class NamingAddPrefixCodeFix : CodeFixProvider
 	{
 		public const string Title = "Prefix method with \"Add\"";
 
-		public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(DependencyInjectionNamingAnalyzer.DiagnosticId);
+		public override ImmutableArray<string> FixableDiagnosticIds => ImmutableArray.Create(NamingAnalyzer.DiagnosticId);
 
 		public override async Task RegisterCodeFixesAsync(CodeFixContext context)
 		{
@@ -47,7 +47,8 @@ namespace Fritz.Analyzers
 
 		}
 
-		private async Task<Solution> ReplaceFirstWordWithAdd(Document document, MethodDeclarationSyntax method, CancellationToken cancellationToken)
+		private async Task<Solution> ReplaceFirstWordWithAdd(Document document, MethodDeclarationSyntax method, 
+			CancellationToken cancellationToken)
 		{
 			var identifierToken = method.Identifier;
 
