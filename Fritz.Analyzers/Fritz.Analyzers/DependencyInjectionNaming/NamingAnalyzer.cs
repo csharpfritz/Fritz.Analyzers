@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Text;
 
-namespace Fritz.Analyzers
+namespace Fritz.Analyzers.DependencyInjectionNaming
 {
 
 	[DiagnosticAnalyzer(LanguageNames.CSharp)]
-	public class DependencyInjectionNamingAnalyzer : DiagnosticAnalyzer
+	public class NamingAnalyzer : DiagnosticAnalyzer
 	{
 
 		public const string DiagnosticId = "FRITZ001";
@@ -42,29 +42,6 @@ namespace Fritz.Analyzers
 						Rule, method.Locations[0]));		
 				}
 			}
-		}
-	}
-
-	internal static class ISymbolExtensions
-	{
-		internal static string GetFullNamespace(this ISymbol @this)
-		{
-			var namespaces = new List<string>();
-			var @namespace = @this.ContainingNamespace;
-
-			while (@namespace != null)
-			{
-				if (!string.IsNullOrWhiteSpace(@namespace.Name))
-				{
-					namespaces.Add(@namespace.Name);
-				}
-
-				@namespace = @namespace.ContainingNamespace;
-			}
-
-			namespaces.Reverse();
-
-			return string.Join(".", namespaces);
 		}
 	}
 
