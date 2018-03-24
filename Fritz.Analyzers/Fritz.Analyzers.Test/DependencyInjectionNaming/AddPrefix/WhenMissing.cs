@@ -33,6 +33,7 @@ namespace SampleLibrary
 	}
 }";
 
+
 		[Test]
 		public void ShouldRaiseWarning()
 		{
@@ -106,8 +107,6 @@ namespace SampleLibrary
 			VerifyCSharpFix(sut, expected, 1);
 
 		}
-
-
 
 		protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
 		{

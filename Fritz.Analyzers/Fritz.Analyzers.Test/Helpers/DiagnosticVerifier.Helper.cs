@@ -182,8 +182,9 @@ namespace TestHelper
 			}
 			return solution.GetProject(projectId);
 		}
-	
+
 		#endregion
+
 	}
 }
 
