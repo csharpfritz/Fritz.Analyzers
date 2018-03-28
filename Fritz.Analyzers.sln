@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27512.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fritz.Analyzers", "Fritz.Analyzers\Fritz.Analyzers\Fritz.Analyzers.csproj", "{93F0ACE1-4718-4D44-B4CF-F59DF96F0C60}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fritz.Analyzers", "Fritz.Analyzers\Fritz.Analyzers\Fritz.Analyzers.csproj", "{93F0ACE1-4718-4D44-B4CF-F59DF96F0C60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fritz.Analyzers.Test", "Fritz.Analyzers\Fritz.Analyzers.Test\Fritz.Analyzers.Test.csproj", "{3026E808-61AE-4B02-8BF2-C40D59BE9B8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fritz.Analyzers.Test", "Fritz.Analyzers\Fritz.Analyzers.Test\Fritz.Analyzers.Test.csproj", "{3026E808-61AE-4B02-8BF2-C40D59BE9B8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fritz.Analyzers.Vsix", "Fritz.Analyzers\Fritz.Analyzers.Vsix\Fritz.Analyzers.Vsix.csproj", "{D8B541DD-F99D-4E14-9E5E-51FF0C4C8E7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLibrary", "SampleLibrary\SampleLibrary.csproj", "{43FA2F55-14E4-4689-BA38-7CBD7CAEEAED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "integrationTest\WebApplication1\WebApplication1.csproj", "{69BD3902-C479-4192-8709-FDE083076FB0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IntegrationTest", "IntegrationTest", "{385F34B2-440D-4AC3-BA57-F7D814482931}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,13 +31,16 @@ Global
 		{D8B541DD-F99D-4E14-9E5E-51FF0C4C8E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8B541DD-F99D-4E14-9E5E-51FF0C4C8E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8B541DD-F99D-4E14-9E5E-51FF0C4C8E7D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{43FA2F55-14E4-4689-BA38-7CBD7CAEEAED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43FA2F55-14E4-4689-BA38-7CBD7CAEEAED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43FA2F55-14E4-4689-BA38-7CBD7CAEEAED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43FA2F55-14E4-4689-BA38-7CBD7CAEEAED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69BD3902-C479-4192-8709-FDE083076FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69BD3902-C479-4192-8709-FDE083076FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69BD3902-C479-4192-8709-FDE083076FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69BD3902-C479-4192-8709-FDE083076FB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{69BD3902-C479-4192-8709-FDE083076FB0} = {385F34B2-440D-4AC3-BA57-F7D814482931}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0CA01EDF-31D0-4414-8562-F693DD99DFC4}

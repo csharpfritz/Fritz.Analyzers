@@ -51,11 +51,10 @@ namespace Fritz.Analyzers.DependencyInjectionNaming
 		private async Task<Solution> ReplaceFirstWordWithAdd(Document document, MethodDeclarationSyntax method, 
 			CancellationToken cancellationToken)
 		{
+
 			var identifierToken = method.Identifier;
 
-
-			var reFirstWord = new Regex("$([A-Z]?[a-z]+)");
-
+			var reFirstWord = new Regex("^([A-Z]?[a-z]+)");
 			var newName = reFirstWord.Replace(identifierToken.Text, "Add");
 
 			var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
