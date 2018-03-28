@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using Fritz.Analyzers.MiddlewareNaming;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using NUnit.Framework;
@@ -7,23 +8,23 @@ using System.Collections.Generic;
 using System.Text;
 using TestHelper;
 
-namespace Fritz.Analyzers.Test.DependencyInjectionNaming.AddPrefix
+namespace Fritz.Analyzers.Test.MiddlewareNaming.MapRunOrUsePrefix
 {
 
 	[TestFixture]
-	public class WhenMissing : CodeFixVerifier
+	public class WhenRunMissing : CodeFixVerifier
 	{
 
 		const string sut = @"
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using System;
 
 namespace SampleLibrary
 {
-	public static class ServiceCollectionExtension
+	public static class MiddlewareExtension
 	{
 
-		public static void DoSomethingCool(this IServiceCollection services)
+		public static void MyMiddleware(this IApplicationBuilder app)
 		{
 
 		}
@@ -39,8 +40,8 @@ namespace SampleLibrary
 
 			var expected = new DiagnosticResult
 			{
-				Id = "FRITZ001",
-				Message = "IServiceCollection methods should start with Add",
+				Id = "FRITZ002",
+				Message = "Middleware methods should start with Map, Run, or Use",
 				Severity = DiagnosticSeverity.Warning,
 				Locations =
 				new[] {
@@ -53,19 +54,19 @@ namespace SampleLibrary
 		}
 
 		[Test]
-		public void ShouldPrefixWithAdd()
+		public void ShouldPrefixWithRun()
 		{
 
 			const string expected = @"
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using System;
 
 namespace SampleLibrary
 {
-	public static class ServiceCollectionExtension
+	public static class MiddlewareExtension
 	{
 
-		public static void AddDoSomethingCool(this IServiceCollection services)
+		public static void RunMyMiddleware(this IApplicationBuilder app)
 		{
 
 		}
@@ -81,19 +82,19 @@ namespace SampleLibrary
 		}
 
 		[Test]
-		public void ShouldReplaceFirstWordWithAdd()
+		public void ShouldReplaceFirstWordWithRun()
 		{
 
 			const string expected = @"
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Builder;
 using System;
 
 namespace SampleLibrary
 {
-	public static class ServiceCollectionExtension
+	public static class MiddlewareExtension
 	{
 
-		public static void AddSomethingCool(this IServiceCollection services)
+		public static void RunMiddleware(this IApplicationBuilder app)
 		{
 
 		}
@@ -109,12 +110,16 @@ namespace SampleLibrary
 
 		protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
 		{
-			return new Fritz.Analyzers.DependencyInjectionNaming.NamingAnalyzer();
+
+			return new NamingAnalyzer();
+
 		}
 
 		protected override CodeFixProvider GetCSharpCodeFixProvider()
 		{
-			return new Fritz.Analyzers.DependencyInjectionNaming.NamingAddPrefixCodeFix();
+
+			return new MiddlewareMapPrefixCodeFix();
+
 		}
 
 	}

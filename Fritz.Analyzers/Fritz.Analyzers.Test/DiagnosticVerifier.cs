@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Builder;
 
 namespace TestHelper
 {
@@ -12,7 +13,8 @@ namespace TestHelper
 
 		private static readonly List<MetadataReference> MyReferences = new List<MetadataReference>
 		{
-			MetadataReference.CreateFromFile(typeof(IServiceCollection).Assembly.Location)
+			MetadataReference.CreateFromFile(typeof(IServiceCollection).Assembly.Location),
+			MetadataReference.CreateFromFile(typeof(IApplicationBuilder).Assembly.Location)
 		};
 
 	}
