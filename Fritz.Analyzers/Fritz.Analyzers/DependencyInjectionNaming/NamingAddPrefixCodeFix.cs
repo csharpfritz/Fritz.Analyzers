@@ -9,6 +9,7 @@ using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -52,8 +53,10 @@ namespace Fritz.Analyzers.DependencyInjectionNaming
 		{
 			var identifierToken = method.Identifier;
 
-			// TODO: Replace first word in method name
-			var newName = $"Add{identifierToken.Text}";
+
+			var reFirstWord = new Regex("$([A-Z]?[a-z]+)");
+
+			var newName = reFirstWord.Replace(identifierToken.Text, "Add");
 
 			var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
 			var methodSymbol = semanticModel.GetDeclaredSymbol(method, cancellationToken);

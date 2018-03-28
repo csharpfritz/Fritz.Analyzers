@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using NUnit.Framework;
 using System;
@@ -13,11 +14,7 @@ namespace Fritz.Analyzers.Test.DependencyInjectionNaming.AddPrefix
 	public class WhenMissing : CodeFixVerifier
 	{
 
-		[Test]
-		public void ShouldRaiseWarning()
-		{
-
-			const string sut = @"
+		const string sut = @"
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -36,6 +33,10 @@ namespace SampleLibrary
 	}
 }";
 
+		[Test]
+		public void ShouldRaiseWarning()
+		{
+
 			var expected = new DiagnosticResult
 			{
 				Id = "FRITZ001",
@@ -51,11 +52,72 @@ namespace SampleLibrary
 
 		}
 
+		[Test]
+		public void ShouldPrefixWithAdd()
+		{
+
+			const string expected = @"
+using Microsoft.Extensions.DependencyInjection;
+using System;
+
+namespace SampleLibrary
+{
+	public static class ServiceCollectionExtension
+	{
+
+		public static void AddDoSomethingCool(this IServiceCollection services)
+		{
+
+		}
+
+		static void Main(string[] args) {}
+
+	}
+}";
+
+			VerifyCSharpFix(sut, expected, 0);
+
+
+		}
+
+		[Test]
+		public void ShouldReplaceFirstWordWithAdd()
+		{
+
+			const string expected = @"
+using Microsoft.Extensions.DependencyInjection;
+using System;
+
+namespace SampleLibrary
+{
+	public static class ServiceCollectionExtension
+	{
+
+		public static void AddSomethingCool(this IServiceCollection services)
+		{
+
+		}
+
+		static void Main(string[] args) {}
+
+	}
+}";
+
+			VerifyCSharpFix(sut, expected, 1);
+
+		}
+
+
+
 		protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
 		{
 			return new Fritz.Analyzers.DependencyInjectionNaming.NamingAnalyzer();
 		}
 
+		protected override CodeFixProvider GetCSharpCodeFixProvider()
+		{
+			return new Fritz.Analyzers.DependencyInjectionNaming.NamingAddPrefixCodeFix();
+		}
 
 	}
 
